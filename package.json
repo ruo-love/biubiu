@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "updateTime": "2024/1/8 17:09:14",
+  "updateTime": "2024/1/8 17:09:22",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
