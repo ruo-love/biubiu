@@ -22,7 +22,7 @@ const updateRepo = () => {
     // push 到远程仓库
     execSync("git add .");
     execSync('git commit -m "update"');
-    execSync("git push origin master");
+    execSync("git push origin main");
     console.log("远程仓库更新成功！");
   } catch (error) {
     console.error("仓库更新失败：", error.message);
