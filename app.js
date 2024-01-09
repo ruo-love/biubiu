@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 // 设置你的仓库路径
 const repoPath = "./";
-const time = "2024 1/8 17.52";
+const time = "2024 1/9 17.52";
 // 更新仓库
 const updateRepo = () => {
   try {
