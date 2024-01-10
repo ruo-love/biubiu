@@ -6,7 +6,8 @@ const repoPath = "./";
 const time = "2024 1/9 17.52";
 // 更新仓库
 const updateRepo = () => {
-  try {
+  try { 
+
     // 进入仓库目录
     process.chdir(repoPath);
     // 执行git pull命令
