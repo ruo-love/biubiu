@@ -10,7 +10,7 @@ const updateRepo = () => {
     // 进入仓库目录
     process.chdir(repoPath);
     // 执行git pull命令
-    execSync("git pull origin master");
+    execSync("git pull origin main");
     console.log("代码拉取成功！");
     //更新package.json 中的updateTime 字段
     const packageJsonPath = path.resolve(__dirname, "./package.json");
