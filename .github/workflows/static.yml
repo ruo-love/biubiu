@@ -35,8 +35,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire repository
-          path: "./index.html"
+          path: "./index.html" # 指定要上传的文件
+          name: "github-pages" # 工件名称
+          retention-days: 1 # 工件保留天数
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
