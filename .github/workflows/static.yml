@@ -43,6 +43,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: github-pages
+          path: "./public"
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -50,9 +51,7 @@ jobs:
       - name: Upload artifact to GitHub Pages
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "./public"
-          name: "github-pages"
-          retention-days: 1
+          path: "dist"
       
       - name: Deploy to GitHub Pages
         id: deployment
