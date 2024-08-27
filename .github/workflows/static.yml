@@ -22,6 +22,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@master
+      - name: Print directory contents
+        run: |
+          ls -l ./
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: github-pages
+          path: "index.html"
   Deploy:
     environment:
       name: github-pages
