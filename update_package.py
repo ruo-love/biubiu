@@ -36,4 +36,4 @@ def run():
     append_to_readme()
     update_github()
 if __name__ == "__main__":
-    update_package_json()
+    run()
