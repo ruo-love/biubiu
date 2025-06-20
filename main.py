@@ -5,6 +5,7 @@ import os
 import sys
 import logging
 from ai.ai import query_ai
+import pytz
 
 # 配置日志
 logging.basicConfig(
@@ -20,7 +21,6 @@ def append_to_readme():
         logging.warning("README.md 文件不存在，创建一个新的")
         readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
 
-    import pytz
     beijing_tz = pytz.timezone('Asia/Shanghai')
     now = datetime.datetime.now(beijing_tz).strftime("%Y-%m-%d %H:%M:%S")
     content_to_insert = query_ai()
