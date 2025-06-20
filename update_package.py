@@ -3,24 +3,21 @@ import datetime
 from pathlib import Path
 import subprocess
 import os
-
-def update_package_json():
-    package_path = Path("package.json")
-    if not package_path.exists():
-        print("❌ package.json 不存在")
-        return
-
-    with package_path.open("r", encoding="utf-8") as f:
-        data = json.load(f)
+def append_to_readme():
+    readme_path = Path("README.md")
+    if not readme_path.exists():
+        print("❌ README.md 文件不存在，创建一个新的")
+        readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
 
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    data["updateTime"] = now
+    content_to_append = f"\n- 更新时间：{now}\n"
 
-    with package_path.open("w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    with readme_path.open("a", encoding="utf-8") as f:
+        f.write(content_to_append)
 
-    print(f"✅ updateTime 更新为: {now}")
+    print(f"✅ 已追加内容到 README.md:\n{content_to_append}")
 
+def update_github():
     # Git 设置
     subprocess.run(["git", "config", "--global", "user.name", "github-actions[bot]"])
     subprocess.run(["git", "config", "--global", "user.email", "github-actions[bot]@users.noreply.github.com"])
@@ -35,5 +32,8 @@ def update_package_json():
     subprocess.run(["git", "commit", "-m", f"chore: update updateTime to {now}"])
     subprocess.run(["git", "push", "origin", "main"])
 
+def run():
+    append_to_readme()
+    update_github()
 if __name__ == "__main__":
     update_package_json()

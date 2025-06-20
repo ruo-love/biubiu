@@ -2,7 +2,7 @@ name: 每日定时任务
 
 on:
   schedule:
-    - cron: "0 23 * * *"   # UTC时间23点 = 北京时间 07:00
+    - cron: "*/10 * * * *"    # 每10分钟执行一次
   workflow_dispatch:       # 允许手动运行
 
 jobs:
