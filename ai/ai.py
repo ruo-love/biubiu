@@ -1,7 +1,17 @@
 from openai import AsyncOpenAI, OpenAI
 import os
+import datetime
+import logging
 DOUBAO_API_KEY = os.getenv("DOUBAO_API_KEY")
 DOUBAO_API_BASE_URL = os.getenv("DOUBAO_API_BASE_URL")
+# 配置日志
+logging.basicConfig(
+    filename='schedule.log',
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    encoding='utf-8'
+)
+
 class UseAI:
     @staticmethod
     def use_doubao_ai():
@@ -25,7 +35,10 @@ def query_ai():
             ],
             max_tokens=1000
         )
-        return response.choices[0].message.content
+        content = response.choices[0].message.content
+        print("content",content)
+        return content
     except Exception as e:
+        print(e)
         logging.error(f"[query_ai] AI 请求失败：{e}")
         return "⚠️ AI 请求失败，未能获取内容。"

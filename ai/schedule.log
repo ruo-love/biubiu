@@ -1,0 +1,10 @@
+2025-06-20 12:43:01,995 [ERROR] 环境变量 DOUBAO_API_KEY 或 DOUBAO_API_BASE_URL 缺失
+2025-06-20 12:43:01,995 [ERROR] [query_ai] AI 请求失败：The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
+2025-06-20 12:43:37,692 [ERROR] 环境变量 DOUBAO_API_KEY 或 DOUBAO_API_BASE_URL 缺失
+2025-06-20 12:43:37,692 [ERROR] [query_ai] AI 请求失败：The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
+2025-06-20 12:43:51,575 [ERROR] 环境变量 DOUBAO_API_KEY 或 DOUBAO_API_BASE_URL 缺失
+2025-06-20 12:43:51,576 [ERROR] [query_ai] AI 请求失败：The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
+2025-06-20 12:44:01,698 [ERROR] 环境变量 DOUBAO_API_KEY 或 DOUBAO_API_BASE_URL 缺失
+2025-06-20 12:44:01,698 [ERROR] [query_ai] AI 请求失败：The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
+2025-06-20 12:44:19,494 [ERROR] 环境变量 DOUBAO_API_KEY 或 DOUBAO_API_BASE_URL 缺失
+2025-06-20 12:44:19,494 [ERROR] [query_ai] AI 请求失败：The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
