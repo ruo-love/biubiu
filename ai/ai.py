@@ -16,10 +16,12 @@ class UseAI:
 def query_ai():
     try:
         client = UseAI.use_doubao_ai()
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         response = client.chat.completions.create(
-            model="doubao-1.5-vision-pro-32k-250115",
+            model="deepseek-r1-250528",
             messages=[
-                {"role": "user", "content": "请检索当前国内外比最新最热的1条新闻给我"}
+                {"role": "system","content": "你是新闻检索助手，你需要根据当前时间来检索新闻"},
+                {"role": "user", "content": f"现在是{now}，请检索今天国内外的1条热点新闻给我"}
             ],
             max_tokens=1000
         )
