@@ -1,26 +1,22 @@
-name: 每分钟更新 package.json 的 updateTime
-
-on:
-  schedule:
-    - cron: "* * * * *"    # 每分钟执行一次（注意 GitHub 使用的是 UTC 时间）
-  workflow_dispatch:       # 支持手动触发调试
-
 jobs:
   update-package:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write  # 👈 允许写入代码仓库
     steps:
-      - name: 📥 拉取代码
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: 🐍 设置 Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
-      - name: ⚙️ 安装依赖
-        run: |
-          pip install -r requirements.txt
+      - name: Install requirements
+        run: pip install -r requirements.txt
 
-      - name: 🚀 运行脚本
+      - name: Run script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 👈 GitHub 自动注入
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: python update_package.py
