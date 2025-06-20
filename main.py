@@ -22,7 +22,7 @@ def append_to_readme():
 
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     content_to_append = query_ai()
-    content_to_append = f"\n\n## 更新时间 {now}\n\n{content_to_append}"
+    content_to_append = f"\n\n#### 更新时间 {now}\n\n{content_to_append}"
     
     with readme_path.open("a", encoding="utf-8") as f:
         f.write(content_to_append)

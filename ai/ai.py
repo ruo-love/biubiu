@@ -19,8 +19,7 @@ def query_ai():
         response = client.chat.completions.create(
             model="doubao-1.5-vision-pro-32k-250115",
             messages=[
-                {"role": "system", "content": "你是一个幽默的助手，请讲一个笑话"},
-                {"role": "user", "content": "讲个笑话吧"}
+                {"role": "user", "content": "请检索当前国内外比最新最热的1条新闻给我"}
             ],
             max_tokens=1000
         )
