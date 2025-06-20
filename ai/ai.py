@@ -26,7 +26,8 @@ class UseAI:
 def query_ai():
     try:
         client = UseAI.use_doubao_ai()
-        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        beijing_tz = pytz.timezone('Asia/Shanghai')
+        now = datetime.datetime.now(beijing_tz).strftime("%Y-%m-%d %H:%M:%S")
         response = client.chat.completions.create(
             model="deepseek-r1-250528",
             messages=[

@@ -1,4 +1,4 @@
-name: 每日定时任务
+name: BiuBiu-News
 
 on:
   schedule:

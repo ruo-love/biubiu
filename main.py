@@ -19,8 +19,8 @@ def append_to_readme():
     if not readme_path.exists():
         logging.warning("README.md 文件不存在，创建一个新的")
         readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
-
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    beijing_tz = pytz.timezone('Asia/Shanghai')
+    now = datetime.datetime.now(beijing_tz).strftime("%Y-%m-%d %H:%M:%S")
     content_to_append = query_ai()
     content_to_append = f"\n\n#### 更新时间 {now}\n\n{content_to_append}"
     
