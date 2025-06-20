@@ -1,3 +1,10 @@
+name: 每日定时任务
+
+on:
+  schedule:
+    - cron: "0 23 * * *"   # UTC时间23点 = 北京时间 07:00
+  workflow_dispatch:       # 允许手动运行
+
 jobs:
   update-package:
     runs-on: ubuntu-latest
@@ -20,3 +27,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 👈 GitHub 自动注入
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: python update_package.py
+
