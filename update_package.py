@@ -1,40 +1,67 @@
-import json
 import datetime
 from pathlib import Path
 import subprocess
 import os
-now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-content_to_append = f"\n- 更新时间：{now}\n"
+import sys
+import logging
+
+# 配置日志
+logging.basicConfig(
+    filename='schedule.log',
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    encoding='utf-8'
+)
+
 def append_to_readme():
     readme_path = Path("README.md")
     if not readme_path.exists():
-        print("❌ README.md 文件不存在，创建一个新的")
+        logging.warning("README.md 文件不存在，创建一个新的")
         readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
 
-
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    content_to_append = f"\n- 更新时间：{now}\n"
 
     with readme_path.open("a", encoding="utf-8") as f:
         f.write(content_to_append)
 
-    print(f"✅ 已追加内容到 README.md:\n{content_to_append}")
+    logging.info(f"已追加内容到 README.md: {content_to_append.strip()}")
 
 def update_github():
-    # Git 设置
-    subprocess.run(["git", "config", "--global", "user.name", "github-actions[bot]"])
-    subprocess.run(["git", "config", "--global", "user.email", "github-actions[bot]@users.noreply.github.com"])
+    try:
+        subprocess.run(["git", "config", "--global", "user.name", "github-actions[bot]"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", "github-actions[bot]@users.noreply.github.com"], check=True)
 
-    # 使用 token 重新设置远程地址（必须使用 https + token）
-    token = os.getenv("GITHUB_TOKEN")
-    repo = os.getenv("GITHUB_REPOSITORY")  # e.g. "ruo-love/my-dream"
-    remote_url = f"https://x-access-token:{token}@github.com/{repo}.git"
-    subprocess.run(["git", "remote", "set-url", "origin", remote_url])
+        token = os.getenv("GITHUB_TOKEN")
+        repo = os.getenv("GITHUB_REPOSITORY")
+        if not token or not repo:
+            logging.error("缺少 GITHUB_TOKEN 或 GITHUB_REPOSITORY 环境变量")
+            sys.exit(1)
 
-    subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", f"chore: update updateTime to {now}"])
-    subprocess.run(["git", "push", "origin", "main"])
+        remote_url = f"https://x-access-token:{token}@github.com/{repo}.git"
+        subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
+
+        status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+        if not status.stdout.strip():
+            logging.info("没有文件变更，无需提交")
+            return
+
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "commit", "-m", "chore: update README.md 更新时间"], check=True)
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+        logging.info("已成功提交并推送到远程仓库")
+
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Git 命令执行失败: {e}")
+        sys.exit(1)
 
 def run():
-    append_to_readme()
-    update_github()
+    try:
+        append_to_readme()
+        update_github()
+    except Exception as e:
+        logging.error(f"脚本运行异常: {e}")
+        sys.exit(1)
+
 if __name__ == "__main__":
     run()
