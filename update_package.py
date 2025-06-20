@@ -28,7 +28,7 @@ def update_github():
     remote_url = f"https://x-access-token:{token}@github.com/{repo}.git"
     subprocess.run(["git", "remote", "set-url", "origin", remote_url])
 
-    subprocess.run(["git", "add", "package.json"])
+    subprocess.run(["git", "add", "."])
     subprocess.run(["git", "commit", "-m", f"chore: update updateTime to {now}"])
     subprocess.run(["git", "push", "origin", "main"])
 
