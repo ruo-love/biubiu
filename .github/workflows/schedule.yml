@@ -8,6 +8,9 @@ on:
 jobs:
   update-package:
     runs-on: ubuntu-latest
+    env:
+      DOUBAO_API_KEY: ${{ secrets.DOUBAO_API_KEY }}
+      DOUBAO_API_BASE_URL: ${{ secrets.DOUBAO_API_BASE_URL }}
     permissions:
       contents: write  # 👈 允许写入代码仓库
     steps:
@@ -26,5 +29,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 👈 GitHub 自动注入
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: python update_package.py
+        run: python mian.py
 

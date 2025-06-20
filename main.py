@@ -4,6 +4,7 @@ import subprocess
 import os
 import sys
 import logging
+from ai.ai import query_ai
 
 # 配置日志
 logging.basicConfig(
@@ -20,7 +21,7 @@ def append_to_readme():
         readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
 
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    content_to_append = f"\n- 更新时间：{now}\n"
+    content_to_append = query_ai()
 
     with readme_path.open("a", encoding="utf-8") as f:
         f.write(content_to_append)
