@@ -6,24 +6,29 @@ on:
   workflow_dispatch:       # 允许手动运行
 
 jobs:
-  update-readme:
+  update-package:
     runs-on: ubuntu-latest
     env:
       DOUBAO_API_KEY: ${{ secrets.DOUBAO_API_KEY }}
       DOUBAO_API_BASE_URL: ${{ secrets.DOUBAO_API_BASE_URL }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_REPOSITORY: ${{ github.repository }}
-
+    permissions:
+      contents: write  # 👈 允许写入代码仓库
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: 设置 Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
-      - name: 安装依赖（如果你需要）
-        run: pip install openai
+      - name: Install requirements
+        run: pip install -r requirements.txt
 
-      - name: 运行脚本
+      - name: Run script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 👈 GitHub 自动注入
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: python main.py
