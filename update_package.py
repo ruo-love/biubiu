@@ -3,14 +3,15 @@ import datetime
 from pathlib import Path
 import subprocess
 import os
+now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+content_to_append = f"\n- 更新时间：{now}\n"
 def append_to_readme():
     readme_path = Path("README.md")
     if not readme_path.exists():
         print("❌ README.md 文件不存在，创建一个新的")
         readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
 
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    content_to_append = f"\n- 更新时间：{now}\n"
+
 
     with readme_path.open("a", encoding="utf-8") as f:
         f.write(content_to_append)
