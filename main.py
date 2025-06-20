@@ -65,4 +65,10 @@ def run():
         sys.exit(1)
 
 if __name__ == "__main__":
-    run()
+    try:
+        run()  # 或你的主逻辑函数
+    except Exception as e:
+        import traceback
+        print("❌ 程序执行失败：", e)
+        traceback.print_exc()
+        exit(1)
