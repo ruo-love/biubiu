@@ -19,16 +19,23 @@ def append_to_readme():
     if not readme_path.exists():
         logging.warning("README.md 文件不存在，创建一个新的")
         readme_path.write_text("# 项目说明\n\n", encoding="utf-8")
+
+    import pytz
     beijing_tz = pytz.timezone('Asia/Shanghai')
     now = datetime.datetime.now(beijing_tz).strftime("%Y-%m-%d %H:%M:%S")
-    content_to_append = query_ai()
-    content_to_append = f"\n\n#### 更新时间 {now}\n\n{content_to_append}"
-    
-    with readme_path.open("a", encoding="utf-8") as f:
-        f.write(content_to_append)
+    content_to_insert = query_ai()
+    content_to_insert = f"\n\n#### 更新时间 {now}\n\n{content_to_insert}\n\n"
 
-    logging.info(f"已追加内容到 README.md: {content_to_append.strip()}")
+    # 先读取旧内容
+    old_content = readme_path.read_text(encoding="utf-8")
 
+    # 新内容放最前面，再加旧内容
+    new_content = content_to_insert + old_content
+
+    # 写回文件
+    readme_path.write_text(new_content, encoding="utf-8")
+
+    logging.info(f"已插入内容到 README.md 开头: {content_to_insert.strip()}")
 def update_github():
     try:
         subprocess.run(["git", "config", "--global", "user.name", "github-actions[bot]"], check=True)
