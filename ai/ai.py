@@ -23,7 +23,19 @@ class UseAI:
             base_url=DOUBAO_API_BASE_URL,
         )
 
+example = """
+**标题：全球人工智能大会今日在杭州开幕，聚焦“AI协同治理与创新发展”**
 
+*   **关键信息：**
+    *   **时间：** 今日（2025年6月20日）开幕。
+    *   **地点：** 中国杭州。
+    *   **事件：** 备受瞩目的全球人工智能大会正式开幕。
+    *   **主题：** “AI协同治理与创新发展”。
+*   **核心看点：**
+    *   会议聚集了全球顶尖AI科学家、头部企业领袖（包括中外科技巨头CEO）、政策制定者。
+    *   与会者分享了最新的AI技术、应用场景，探讨合作与整合的重要性。
+    *   与会者还分享了他们在AI领域的创新实践和成功案例。
+"""
 def query_ai():
     try:
         client = UseAI.use_doubao_ai()
@@ -32,7 +44,7 @@ def query_ai():
         response = client.chat.completions.create(
             model="deepseek-r1-250528",
             messages=[
-                {"role": "system","content": "你是新闻检索助手，你需要根据当前时间来检索新闻"},
+                {"role": "system","content": "你是新闻检索助手，你需要根据当前时间来检索新闻,直接给我新闻内容，格式如下：\n"+example},
                 {"role": "user", "content": f"现在是{now}，请检索今天国内外的1条热点新闻给我"}
             ],
             max_tokens=1000
