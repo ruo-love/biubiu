@@ -2,7 +2,7 @@ name: BiuBiu-News
 
 on:
   schedule:
-    - cron: "0 */2 * * *"    # 每10分钟执行一次
+    - cron: "0 15 * * *"    # 每天 15:00 UTC 运行
   workflow_dispatch:       # 允许手动运行
 
 jobs:
