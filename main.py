@@ -24,7 +24,7 @@ def append_to_readme():
     beijing_tz = pytz.timezone('Asia/Shanghai')
     now = datetime.datetime.now(beijing_tz).strftime("%Y-%m-%d %H:%M:%S")
     # content_to_insert = query_ai()
-    content_to_insert = f"\n\n###### {now}\n\n\n![ruo-love](https://ghchart.rshah.org/ruo-love)"
+    content_to_insert = f"\n\n###### {now} 打卡成功\n\n\n![ruo-love](https://ghchart.rshah.org/000000/ruo-love)"
 
     # 先读取旧内容
     # old_content = readme_path.read_text(encoding="utf-8")
