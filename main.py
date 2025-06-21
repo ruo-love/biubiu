@@ -24,16 +24,16 @@ def append_to_readme():
     beijing_tz = pytz.timezone('Asia/Shanghai')
     now = datetime.datetime.now(beijing_tz).strftime("%Y-%m-%d %H:%M:%S")
     # content_to_insert = query_ai()
-    content_to_insert = f"\n\n###### {now}\n\n\n"
+    content_to_insert = f"\n\n###### {now}\n\n\n![ruo-love](https://ghchart.rshah.org/ruo-love)"
 
     # 先读取旧内容
-    old_content = readme_path.read_text(encoding="utf-8")
+    # old_content = readme_path.read_text(encoding="utf-8")
 
     # 新内容放最前面，再加旧内容
-    new_content = content_to_insert + old_content
+    # new_content = content_to_insert + old_content
 
     # 写回文件
-    readme_path.write_text(new_content, encoding="utf-8")
+    readme_path.write_text(content_to_insert, encoding="utf-8")
 
     logging.info(f"已插入内容到 README.md 开头: {content_to_insert.strip()}")
 def update_github():
