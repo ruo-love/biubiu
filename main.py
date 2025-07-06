@@ -56,7 +56,7 @@ def update_github():
             return
 
         subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "-m", "chore: update README.md 更新时间"], check=True)
+        subprocess.run(["git", "commit", "-m", "chore: update README.md {now}"], check=True)
         subprocess.run(["git", "push", "origin", "main"], check=True)
         logging.info("已成功提交并推送到远程仓库")
 
