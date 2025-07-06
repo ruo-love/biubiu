@@ -38,8 +38,9 @@ def append_to_readme():
     logging.info(f"已插入内容到 README.md 开头: {content_to_insert.strip()}")
 def update_github():
     try:
+        EMAIL = os.getenv("EMAIL")
         subprocess.run(["git", "config", "--global", "user.name", "ruo-love"], check=True)
-        subprocess.run(["git", "config", "--global", "user.email", "zl18180276692@outlook.com"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", EMAIL], check=True)
 
         token = os.getenv("GITHUB_TOKEN")
         repo = os.getenv("GITHUB_REPOSITORY")
